@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :profiles
   resources :todo_lists do
-    resources :todo_items
+    resources :todo_items#, only: [:create, :destroy]
   end
   
   
