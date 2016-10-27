@@ -1,28 +1,23 @@
 class TodoItemsController < ApplicationController
   before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
 
-  # GET /todo_items
-  # GET /todo_items.json
-  def index
-    @todo_items = TodoItem.all
-  end
 
-  # GET /todo_items/1
-  # GET /todo_items/1.json
+  # GET /todo_list/:todo_list_id/todo_list/:todo_list_id/todo_items/1
+  # GET /todo_list/:todo_list_id/todo_items/1.json
   def show
   end
 
-  # GET /todo_items/new
+  # GET /todo_list/:todo_list_id/todo_items/new
   def new
     @todo_item = TodoItem.new
   end
 
-  # GET /todo_items/1/edit
+  # GET /todo_list/:todo_list_id/todo_items/1/edit
   def edit
   end
 
-  # POST /todo_items
-  # POST /todo_items.json
+  # POST /todo_list/:todo_list_id/todo_items
+  # POST /todo_list/:todo_list_id/todo_items.json
   def create
     @todo_item = TodoItem.new(todo_item_params)
 
@@ -37,8 +32,8 @@ class TodoItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /todo_items/1
-  # PATCH/PUT /todo_items/1.json
+  # PATCH/PUT /todo_list/:todo_list_id/todo_items/1
+  # PATCH/PUT /todo_list/:todo_list_id/todo_items/1.json
   def update
     respond_to do |format|
       if @todo_item.update(todo_item_params)
@@ -51,8 +46,8 @@ class TodoItemsController < ApplicationController
     end
   end
 
-  # DELETE /todo_items/1
-  # DELETE /todo_items/1.json
+  # DELETE /todo_list/:todo_list_id/todo_items/1
+  # DELETE /todo_list/:todo_list_id/todo_items/1.json
   def destroy
     @todo_item.destroy
     respond_to do |format|
@@ -71,4 +66,8 @@ class TodoItemsController < ApplicationController
     def todo_item_params
       params.require(:todo_item).permit(:title, :due_date, :description, :completed)
     end
+
+    #Set TodoList via TodoItem Controller
+    def set_todo_list
+      @todo_list = 
 end
