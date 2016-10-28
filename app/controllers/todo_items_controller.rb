@@ -1,5 +1,5 @@
 class TodoItemsController < ApplicationController
-  before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list, :set_todo_item, only: [:show, :edit, :update, :destroy]
 
 
   # GET /todo_list/:todo_list_id/todo_list/:todo_list_id/todo_items/1
@@ -10,6 +10,7 @@ class TodoItemsController < ApplicationController
   # GET /todo_list/:todo_list_id/todo_items/new
   def new
     @todo_item = TodoItem.new
+
   end
 
   # GET /todo_list/:todo_list_id/todo_items/1/edit
@@ -59,7 +60,7 @@ class TodoItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_item
-      @todo_item = TodoItem.find(params[:id])
+      @todo_item = @todo_list.todo_items.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -69,5 +70,8 @@ class TodoItemsController < ApplicationController
 
     #Set TodoList via TodoItem Controller
     def set_todo_list
-      @todo_list = 
+      #list_id = TodoItem.find(params[:id]).todo_list_id
+      @todo_list = TodoList.find(params[:todo_list_id])
+    end
+
 end
