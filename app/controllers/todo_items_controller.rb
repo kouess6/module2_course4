@@ -9,7 +9,7 @@ class TodoItemsController < ApplicationController
 
   # GET /todo_list/:todo_list_id/todo_items/new
   def new
-    @todo_item = TodoItem.new
+    @todo_item = @todo_list.todo_items.new
 
   end
 
@@ -20,12 +20,12 @@ class TodoItemsController < ApplicationController
   # POST /todo_list/:todo_list_id/todo_items
   # POST /todo_list/:todo_list_id/todo_items.json
   def create
-    @todo_item = TodoItem.new(todo_item_params)
+    @todo_item = @todo_list.todo_items.new(todo_item_params)
 
     respond_to do |format|
       if @todo_item.save
-        format.html { redirect_to @todo_item, notice: 'Todo item was successfully created.' }
-        format.json { render :show, status: :created, location: @todo_item }
+        format.html { redirect_to todo_lists_url, notice: 'Todo item was successfully created.' }
+        format.json { render :index, status: :created, location: @todo_list }
       else
         format.html { render :new }
         format.json { render json: @todo_item.errors, status: :unprocessable_entity }
@@ -38,8 +38,8 @@ class TodoItemsController < ApplicationController
   def update
     respond_to do |format|
       if @todo_item.update(todo_item_params)
-        format.html { redirect_to @todo_item, notice: 'Todo item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @todo_item }
+        format.html { redirect_to todo_lists_url, notice: 'Todo item was successfully updated.' }
+        format.json { render :index, status: :ok, location: @todo_list }
       else
         format.html { render :edit }
         format.json { render json: @todo_item.errors, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TodoItemsController < ApplicationController
   def destroy
     @todo_item.destroy
     respond_to do |format|
-      format.html { redirect_to todo_items_url, notice: 'Todo item was successfully destroyed.' }
+      format.html { redirect_to todo_lists_url, notice: 'Todo item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
