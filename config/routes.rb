@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  
-  get 'sessions/new'
-
-  get 'sessions/create'
-
-  get 'sessions/destroy'
-
   root to: "todo_lists#index"
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get "/login" => "sessions#new", as: "login"
+  delete "/logout" => "sessions#destroy", as: "logout"
+
+  
   resources :users
   resources :profiles
   resources :todo_lists do
