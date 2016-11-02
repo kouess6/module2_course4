@@ -14,6 +14,7 @@ class TodoItemsController < ApplicationController
 
   # GET /todo_list/:todo_list_id/todo_items/new
   def new
+    @todo_list = set_todo_list
     @todo_item = @todo_list.todo_items.new
   end
 
@@ -24,6 +25,7 @@ class TodoItemsController < ApplicationController
   # POST /todo_list/:todo_list_id/todo_items
   # POST /todo_list/:todo_list_id/todo_items.json
   def create
+    @todo_list = set_todo_list
     @todo_item = @todo_list.todo_items.new(todo_item_params)
 
     respond_to do |format|
@@ -68,6 +70,7 @@ class TodoItemsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_item
+      @todo_list = set_todo_list
       @todo_item = @todo_list.todo_items.find(params[:id])
     end
 
