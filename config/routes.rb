@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :todo_items
-  resources :todo_lists
+  root to: "todo_lists#index"
+  resources :todo_lists do
+    resources :todo_items
+  end
   resources :profiles
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
